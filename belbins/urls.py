@@ -18,4 +18,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', 'belbin.views.index' , name='index'),
+    url(r'^register/', 'belbin.views.register', name='register')
 ]
