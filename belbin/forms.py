@@ -11,6 +11,10 @@ class RegisterForm(forms.Form):
 	sgrade = forms.CharField(label = '年级')
 	scollege = forms.CharField(label = '专业')
 
+class LoginForm(forms.Form):
+	sid = forms.CharField(label = '学号')
+	spwd = forms.CharField(label = '密码',widget=forms.PasswordInput(attrs={'placeholder': '密码'}))
+
 class ExamForm(forms.Form):
 	RADIO_CHOICES1 = (
 		('RI','我能很快地发现并把握住新的机遇。'),

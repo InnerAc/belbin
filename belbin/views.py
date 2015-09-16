@@ -9,7 +9,21 @@ from belbin.function import toCharacter
 # Create your views here.
 
 def index(request):
-	return render(request,'index.html')
+	if request.method == 'POST':
+		form = LoginForm(request.POST)
+		
+		if form.is_valid():
+			sid = request.POST['sid']
+			tmp_stu = True
+			try:
+				stu = Student.objects.get(s_id = sid)
+			except ObjectDoesNotExist:
+				tmp_stu = False
+			if tmp_stu:
+				if stu.s_pwd == request.POST['spwd']		
+					request.session['isLogin'] = True
+				
+	return render(request,'index.html',{'form': form})
 
 def register(request):
 	
@@ -69,6 +83,7 @@ def exam(request):
 			return HttpResponseRedirect('/info/'+sid)
 	form = ExamForm()
 	return render(request,'exam.html',{'form': form})
+
 
 def info(request,sid):
 	try:
