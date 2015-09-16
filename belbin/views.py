@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from belbin.models import Student
 from belbin.forms import RegisterForm
+from belbin.forms import ExamForm
 from django.core.exceptions import ObjectDoesNotExist
 # Create your views here.
 
@@ -46,4 +47,14 @@ def register(request):
 				return HttpResponse(u"register success")
 	form = RegisterForm()
 	return render(request,'register.html',{'form': form})
-				
+
+def exam(request):
+	if request.method == 'POST':
+		form = ExamForm(request.POST)
+		if form.is_valid():
+			one = request.POST['check1']
+			two = request.POST['check2']
+			print one,two
+			return HttpResponse(one+two)
+	form = ExamForm()
+	return render(request,'exam.html',{'form': form})
