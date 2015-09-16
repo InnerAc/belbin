@@ -50,11 +50,13 @@ def register(request):
 
 def exam(request):
 	if request.method == 'POST':
+		print 'post!!!!!!!!!!!!!!!'
 		form = ExamForm(request.POST)
-		if form.is_valid():
-			one = request.POST['check1']
-			two = request.POST['check2']
-			print one,two
-			return HttpResponse(one+two)
+		# if form.is_valid():
+		one = request.POST['check1']
+		two = request.POST['check2']
+		print one,two
+		return HttpResponse(one+two)
 	form = ExamForm()
+	print 'ahhhh'
 	return render(request,'exam.html',{'form': form})
