@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^$', 'belbin.views.index' , name='index'),
     url(r'^register/', 'belbin.views.register', name='register'),
     url(r'^exam/', 'belbin.views.exam', name='exam'),
+    url(r'^info/(.+)', 'belbin.views.info', name='info'),
 ]

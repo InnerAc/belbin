@@ -5,6 +5,7 @@ from belbin.models import Student
 from belbin.forms import RegisterForm
 from belbin.forms import ExamForm
 from django.core.exceptions import ObjectDoesNotExist
+from belbin.function import toCharacter
 # Create your views here.
 
 def index(request):
@@ -64,7 +65,15 @@ def exam(request):
 			stu = Student.objects.get(s_id = sid)
 			stu.s_characters = character
 			stu.save()
-			return HttpResponseRedirect('/')
+			print toCharacter.charaDict[character]
+			return HttpResponseRedirect('/info/'+sid)
 	form = ExamForm()
-	print 'ahhhh'
 	return render(request,'exam.html',{'form': form})
+
+def info(request,sid):
+	try:
+		stu = Student.objects.get(s_id = sid)
+	except ObjectDoesNotExist:
+		return HttpResponseRedirect('/')
+	stu.s_characters = toCharacter.charaDict[stu.s_characters]
+	return render(request,'info.html',{'stu': stu})
