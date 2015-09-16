@@ -31,7 +31,6 @@ def register(request):
 				swechat = request.POST['swechat']
 				sgrade = request.POST['sgrade']
 				scollege = request.POST['scollege']
-				# character = request.POST['character']
 				
 				stu = Student(s_id = sid)
 				stu.s_name = sname
@@ -41,22 +40,31 @@ def register(request):
 				stu.s_wechat = swechat
 				stu.s_grade = sgrade
 				stu.s_college = scollege
-				# stu.s_characters = character
 				stu.save()
-				print 'success'
-				return HttpResponse(u"register success")
+				
+				request.session['sid'] = sid
+				
+				return HttpResponseRedirect('/exam')
 	form = RegisterForm()
 	return render(request,'register.html',{'form': form})
 
 def exam(request):
 	if request.method == 'POST':
-		print 'post!!!!!!!!!!!!!!!'
 		form = ExamForm(request.POST)
-		# if form.is_valid():
-		one = request.POST['check1']
-		two = request.POST['check2']
-		print one,two
-		return HttpResponse(one+two)
+		characters = {'CW':0,'CO':0,'SH':0,'PL':0,'RI':0,'ME':0,'TW':0,'FI':0}
+		if form.is_valid():
+			for i in range(1,8):
+				tmp_check = 'check'+str(i)
+				chara = request.POST[tmp_check]
+				characters[chara] += 1
+			for k,v in characters.items():
+				if v == max(characters.values()):
+					character = k
+			sid = request.session.get('sid')
+			stu = Student.objects.get(s_id = sid)
+			stu.s_characters = character
+			stu.save()
+			return HttpResponseRedirect('/')
 	form = ExamForm()
 	print 'ahhhh'
 	return render(request,'exam.html',{'form': form})
