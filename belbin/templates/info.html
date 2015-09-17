@@ -5,11 +5,16 @@
 <title>BelBin Exam</title>
 </head>
 <body>
+	{% include "header.html" %}
 	{{ stu.s_id }}<br>
 	{{ stu.s_name }}<br>
 	{{ stu.s_phone }}<br>
 	{{ stu.s_email }}<br>
 	{{ stu.s_wechat }}<br>
-	{{ stu.s_characters }}
+	{% if stu.s_characters == 'null' %}
+		<a href="/exam">请完善性格测试</a>
+	{% else %}
+		{{ stu.s_characters }}
+	{% endif %}
 </body>
 </html>

@@ -4,6 +4,7 @@ from django.shortcuts import render
 from belbin.models import Student
 from belbin.forms import RegisterForm
 from belbin.forms import ExamForm
+from belbin.forms import LoginForm
 from django.core.exceptions import ObjectDoesNotExist
 from belbin.function import toCharacter
 # Create your views here.
@@ -20,11 +21,24 @@ def index(request):
 			except ObjectDoesNotExist:
 				tmp_stu = False
 			if tmp_stu:
-				if stu.s_pwd == request.POST['spwd']		
+				if stu.s_pwd == request.POST['spwd']:	
 					request.session['isLogin'] = True
-				
-	return render(request,'index.html',{'form': form})
+					request.session['sid'] = sid
+					return HttpResponseRedirect('/info/'+sid)
+	if request.session.get('isLogin'):
+		sid = request.session.get('sid') 
+		return HttpResponseRedirect('/info/'+sid)
+	else:
+		form = LoginForm()
+		return render(request,'index.html',{'form': form})
 
+def logout(request):
+	try:
+		del request.session['isLogin']
+		del request.session['sid']
+	except:
+		print 'no exit'
+	return HttpResponseRedirect('/')
 def register(request):
 	
 	if request.method == 'POST':
@@ -90,5 +104,8 @@ def info(request,sid):
 		stu = Student.objects.get(s_id = sid)
 	except ObjectDoesNotExist:
 		return HttpResponseRedirect('/')
-	stu.s_characters = toCharacter.charaDict[stu.s_characters]
+	if stu.s_characters:
+		stu.s_characters = toCharacter.charaDict[stu.s_characters]
+	else:
+		stu.s_characters = 'null'
 	return render(request,'info.html',{'stu': stu})
