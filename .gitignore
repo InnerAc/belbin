@@ -5,7 +5,7 @@ db.sqlite3
 migrations
 # C extensions
 *.so
-
+*~
 # Distribution / packaging
 .Python
 env/

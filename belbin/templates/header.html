@@ -3,9 +3,38 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>header</title>
+<style>
+	#header{
+		margin-bottom: 10px;
+		width: 100%;
+		height: auto;	
+	}
+</style>
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static "css/button.css" %}" media="screen">
 </head>
 <body>
-	<a href="/logout"><button>退出</button></a>
 	<br>
+	{{ STATIC_URL }}
+	<div id="header">
+		<a href="/">
+			<div class="button green">
+				<div class="shine"></div>
+				个人信息
+			</div>
+		</a>
+		<a href="/exam">
+			<div class="button blue">
+				<div class="shine"></div>
+				重新测试
+			</div>
+		</a>
+		<a href="/logout">
+			<div class="button gray">
+				<div class="shine"></div>
+				退出
+			</div>
+		</a>
+	</div>
 </body>
 </html>

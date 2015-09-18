@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.conf import settings
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
@@ -23,4 +24,6 @@ urlpatterns = [
     url(r'^exam/', 'belbin.views.exam', name='exam'),
     url(r'^info/(.+)', 'belbin.views.info', name='info'),
     url(r'^logout', 'belbin.views.logout', name='logout'),
+    
+    # url(r'^static/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.STATIC_ROOT}),  
 ]
