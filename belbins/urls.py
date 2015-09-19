@@ -20,6 +20,7 @@ from django.conf import settings
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'belbin.views.index' , name='index'),
+    url(r'^match3$', 'belbin.match.match3' , name='match3'),
     url(r'^register/', 'belbin.views.register', name='register'),
     url(r'^exam/', 'belbin.views.exam', name='exam'),
     url(r'^info/(.+)', 'belbin.views.info', name='info'),

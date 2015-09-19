@@ -1,0 +1,27 @@
+from django.http import HttpResponse
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+from belbin.models import Student
+from belbin.forms import RegisterForm
+from belbin.forms import ExamForm
+from belbin.forms import LoginForm
+from django.core.exceptions import ObjectDoesNotExist
+from belbin.function import toCharacter
+
+
+def isLogin(request):
+	if request.session.get('isLogin'):
+		sid = request.session.get('sid') 
+		return True
+	else:
+		return False
+
+
+def index(request):
+	if isLogin(request):
+		pass
+	else:
+		return HttpResponseRedirect('/')
+	sid = request.session.get('sid')
+	stu = Student.objects.get(s_id = sid)
+	chara = stu.s_characters

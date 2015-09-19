@@ -10,3 +10,10 @@ class toCharacter:
 		'TW':'凝聚者',
 		'FI':'完成者'
 	}
+
+class Team:
+	team3 = {
+		'one' : ['CW','SH','TW','RI'],
+		'two' : ['CO','PL','FI','ME'],
+		'three': ['CO','PL','FI','ME']
+	}
