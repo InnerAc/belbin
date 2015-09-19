@@ -9,6 +9,14 @@ from django.core.exceptions import ObjectDoesNotExist
 from belbin.function import toCharacter
 # Create your views here.
 
+def isLogin(request):
+	if request.session.get('isLogin'):
+		sid = request.session.get('sid') 
+		return True
+	else:
+		return False
+
+
 def index(request):
 	if request.method == 'POST':
 		form = LoginForm(request.POST)
@@ -78,6 +86,11 @@ def register(request):
 	return render(request,'register.html',{'form': form})
 
 def exam(request):
+	if isLogin(request):
+		pass
+	else:
+		return HttpResponseRedirect('/')
+	
 	if request.method == 'POST':
 		form = ExamForm(request.POST)
 		characters = {'CW':0,'CO':0,'SH':0,'PL':0,'RI':0,'ME':0,'TW':0,'FI':0}
