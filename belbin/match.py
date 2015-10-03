@@ -47,6 +47,56 @@ def match3(request,types):
 		if(is_select):
 			canlists.append(li)
 	print canlists
-	# team3 = Team3(one = sid)
-	# team3.save()
+	
+	# Start match
+	isok = True
+	for can in canlists:
+		if(can == 'one'):
+			teams = Team3.objects.filter(one = '',t3_name = types)
+			if teams:
+				team = teams[0]
+				team.one = sid
+				stu.s_tid = team.id
+				team.save()
+				stu.save()
+				isok = False
+				break;
+			else:
+				continue
+		elif can == 'two':
+			teams = Team3.objects.filter(two = '',t3_name = types)
+			if teams:
+				team = teams[0]
+				team.two = sid
+				stu.s_tid = team.id
+				team.save()
+				stu.save()
+				isok = False
+				break;
+			else:
+				continue
+		elif can == 'three':
+			teams = Team3.objects.filter(three = '',t3_name = types)
+			if teams:
+				team = teams[0]
+				team.three = sid
+				stu.s_tid = team.id
+				team.save()
+				stu.save()
+				isok = False
+				break;
+			else:
+				continue
+	if isok:
+		team = Team3.objects.create(t3_name = types)
+		can = canlists[0]
+		if(can == 'one'):
+			team.one = sid
+		elif can == 'two':
+			team.two = sid
+		elif can == 'three':
+			team.three = sid
+		team.save()
+		stu.s_tid = team.id
+		stu.save()
 	return HttpResponseRedirect('/')
