@@ -16,8 +16,17 @@ class LoginForm(forms.Form):
 	spwd = forms.CharField(label = '密码',widget=forms.PasswordInput(attrs={'placeholder': '密码'}))
 
 class MatchForm(forms.Form):
-	SELECT_NUM = ()
-	num = forms.ChoiceField()
+	SELECT_NUM = (
+		(3,3),
+		(4,4),
+		(5,5),
+	)
+	SELECT_TYPE = (
+		('挑战杯','挑战杯'),
+		('创青春','创青春'),
+	)
+	t_num = forms.ChoiceField(label="组队人数", choices=SELECT_NUM)
+	t_type = forms.ChoiceField(label="比赛名称", choices=SELECT_TYPE)
 
 class ExamForm(forms.Form):
 	RADIO_CHOICES1 = (

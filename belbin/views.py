@@ -109,7 +109,7 @@ def exam(request):
 			print toCharacter.charaDict[character]
 			return HttpResponseRedirect('/info/'+sid)
 	form = ExamForm()
-	return render(request,'exam.html',{'form': form})
+	return render(request,'form.html',{'form': form})
 
 
 def info(request,sid):
