@@ -15,6 +15,10 @@ class LoginForm(forms.Form):
 	sid = forms.CharField(label = '学号')
 	spwd = forms.CharField(label = '密码',widget=forms.PasswordInput(attrs={'placeholder': '密码'}))
 
+class MatchForm(forms.Form):
+	SELECT_NUM = ()
+	num = forms.ChoiceField()
+
 class ExamForm(forms.Form):
 	RADIO_CHOICES1 = (
 		('RI','我能很快地发现并把握住新的机遇。'),
