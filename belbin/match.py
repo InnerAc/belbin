@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from belbin.models import Student
+from belbin.models import Team3
 from belbin.forms import RegisterForm
 from belbin.forms import ExamForm
 from belbin.forms import LoginForm
@@ -12,7 +13,6 @@ from belbin.function import toCharacter
 
 def isLogin(request):
 	if request.session.get('isLogin'):
-		sid = request.session.get('sid') 
 		return True
 	else:
 		return False
@@ -34,4 +34,6 @@ def match3(request):
 		if(is_select):
 			break
 	print li
+	team3 = Team3(one = sid)
+	team3.save()
 	return HttpResponseRedirect('/')

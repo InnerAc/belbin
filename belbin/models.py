@@ -14,3 +14,11 @@ class Student(models.Model):
 	s_characters = models.CharField(max_length=3)
 	
 	s_tid = models.CharField(max_length=20)
+
+class Team3(models.Model):
+	t3_name = models.CharField(max_length=20)
+	one = models.CharField(max_length=20)
+	two = models.CharField(max_length=20)
+	three = models.CharField(max_length=20)
+	
+	t3_isfull = models.CharField(max_length=3)

@@ -10,7 +10,7 @@ class toCharacter:
 		'TW':'凝聚者',
 		'FI':'完成者'
 	}
-
+# 在这里添加组队的信息
 class Team:
 	team3 = {
 		'one' : ['CW','SH','TW','RI'],
