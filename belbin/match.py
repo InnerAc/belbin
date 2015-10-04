@@ -1,3 +1,4 @@
+#coding:utf-8
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -20,6 +21,13 @@ def match(request):
 		pass
 	else:
 		return HttpResponseRedirect('/')
+	
+	# judge is match
+	sid = request.session.get('sid')
+	stu = Student.objects.get(s_id = sid)
+	if stu.s_tid != '':
+		string = u'您已匹配到队伍'
+		return render(request,'show.html',{'string': string})
 	
 	if request.method == 'POST':
 		form = MatchForm(request.POST)
