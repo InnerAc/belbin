@@ -28,7 +28,11 @@ def match(request):
 	if stu.s_tid != '':
 		string = u'您已匹配到队伍'
 		return render(request,'show.html',{'string': string})
-	
+	if stu.s_characters:
+		pass
+	else:
+		string = u'请完善性格测试'
+		return render(request,'show.html',{'string': string})
 	if request.method == 'POST':
 		form = MatchForm(request.POST)
 		if form.is_valid():
@@ -36,7 +40,7 @@ def match(request):
 			types = request.POST['t_type']
 			print num,types
 			if num == '3':
-				match3(request,types)
+				return match3(request,types)
 	form = MatchForm()
 	return render(request,'form.html',{'form': form})
 
@@ -107,4 +111,5 @@ def match3(request,types):
 		team.save()
 		stu.s_tid = team.id
 		stu.save()
-	return HttpResponseRedirect('/')
+	string = '匹配成功'
+	return render(request,'show.html',{'string': string})

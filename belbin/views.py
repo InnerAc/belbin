@@ -40,7 +40,7 @@ def index(request):
 		form = LoginForm()
 		return render(request,'index.html',{'form': form})
 
-def logout(request):
+def logout(request):	
 	try:
 		del request.session['isLogin']
 		del request.session['sid']
@@ -80,7 +80,7 @@ def register(request):
 				stu.save()
 				
 				request.session['sid'] = sid
-				
+				request.session['isLogin'] = True
 				return HttpResponseRedirect('/exam')
 	form = RegisterForm()
 	return render(request,'register.html',{'form': form})
